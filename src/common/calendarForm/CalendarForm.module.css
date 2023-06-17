@@ -1,0 +1,35 @@
+.calendar {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+    border-radius: var(--border-radius-primary);
+    box-shadow: 0 0px 3px 1px #e4e4e4;
+    background-color: var(--white);
+}
+
+.calendar__form {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 15px;
+}
+
+.calendar__ToWords {
+    font-weight: 500;
+    font-style: italic;
+    margin: 20px auto;
+}
+
+.calendar__ToCron {
+    min-width: 200px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: var(--white);
+    outline: 2px solid var(--blue-0);
+    border-radius: var(--border-radius-primary);
+    font-size: var(--font-600);
+    margin-left: auto;
+    margin-right: auto;
+}

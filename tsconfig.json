@@ -1,5 +1,32 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "assets/*": [
+        "assets/*"
+      ],
+      "common/*": [
+        "common/*"
+      ],
+      "context/*": [
+        "context/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "hooks/*": [
+        "hooks/*"
+      ],
+      "layouts/*": [
+        "layouts/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ],
+      "schema/*": [
+        "schema/*"
+      ]
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -18,7 +45,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
   },
   "include": [
     "src"

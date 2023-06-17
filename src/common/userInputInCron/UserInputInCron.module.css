@@ -1,0 +1,37 @@
+.userInput__Form {
+    display: flex;
+    border-radius: 20px 0 0 20px;
+    height: 40px;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+
+.userInput__inputBox {
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+    font-size: var(--font-600);
+    color: var(--white);
+    padding-left: 20px;
+    border-radius: inherit;
+    background-color: #333333;
+    border: none;
+    outline: none;
+}
+
+.userInput__inputBox::placeholder {
+    color: gray;
+    font-style: italic;
+}
+
+.userInput__btn {
+    border-radius: 0 20px 20px 0;
+    height: 100%;
+}
+
+.userInput__errorField {
+    text-align: center;
+    color: var(--red-0);
+}

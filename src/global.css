@@ -1,0 +1,205 @@
+/* import fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+
+/* start global */
+:root {
+    --font-dark: #111;
+    --font-light: #fff;
+
+    --black: #111;
+    --blue-0: #6db0ff;
+    --blue-1: #f8f9ff;
+    --blue-2: #e6e7f1;
+    --white: #fff;
+    --gray-0: #999;
+    --gray-1: #e7e7e7;
+    --red-0: #fc7f7f;
+
+    --shadow-color: #e7e7e7;
+
+    --border-radius-primary: 8px;
+    --border-radius-secondary: 4px;
+
+    --font-family: 'Poppins', sans-serif;
+    --font-200: 0.6rem;
+    --font-300: 0.875rem;
+    --font-400: 1rem;
+    --font-600: 1.25rem;
+    --font-700: 2rem;
+    --font-xl: 3rem;
+}
+
+@media (max-width: 575px) {
+    :root {
+        --font-200: 0.5rem;
+        --font-300: 0.75rem;
+        --font-400: 0.9rem;
+        --font-600: 1rem;
+        --font-700: 1.5rem;
+        --font-xl: 2rem;
+    }
+}
+
+*,
+*::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--font-dark);
+    font-size: var(--font-400);
+    background-color: var(--blue-1);
+    letter-spacing: 0.02em;
+}
+
+img {
+    display: block;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+
+.container {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 575px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+/* end global */
+.btn {
+    outline: none;
+    border: none;
+    padding: 10px 20px;
+    text-transform: capitalize;
+    width: 100%;
+    max-width: 140px;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-primary);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--blue-0);
+    color: var(--white);
+}
+
+.btn-outlined {
+    background-color: var(--white);
+    border-color: var(--blue-0);
+    color: var(--blue-0);
+}
+
+.btn-centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn:active {
+    scale: 0.98;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 3px;
+    background-color: var(--white);
+    border: 1px solid var(--blue-0);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--blue-0);
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    left: 60%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+}
+
+.errorMessage {
+    font-size: var(--font-300);
+    color: var(--red-0);
+}
+
+/* start animation */
+.fadeIn-animation {
+    animation: fadeIn 2s 1 forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* end animation */
