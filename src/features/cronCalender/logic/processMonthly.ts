@@ -1,40 +1,36 @@
-import { weeklyRangeRegexLetters, weeklyRangeRegexNum, weeklySeparatorRegex } from "utils/regexPatterns/regexPatterns";
+import { monthlyRangeLetters, monthlyRangeNums, monthlySeparatorLetters, monthlySeparatorNums } from "utils/regexPatterns/regexPatterns";
 
-const weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-const separatorRegex = weeklySeparatorRegex;
-const rangeRegexNum = weeklyRangeRegexNum;
-const rangeRegexLetters = weeklyRangeRegexLetters;
+const months = ['', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 type Output = {
     result: string[]
 }
 
-const processWeekly = (inputValue: string): Output => {
+const processMonthly = (inputValue: string): Output => {
     const value = inputValue.toLowerCase();
-    let result: string[] = [];
-
+    let result: string[] = []
     if (value === '*') {
         result = [];
 
-    } else if (value.length === 1) {
-        result = [value];
-
-    } else if (value.match(separatorRegex)) {
+    } else if (value.match(monthlySeparatorNums)) {
         result = value.trim().split(',');
 
-    } else if (value.match(rangeRegexNum)) {
+    } else if (value.match(monthlyRangeNums)) {
         const range = indexesFromRangeNum(value);
         result = range;
 
-    } else if (value.match(rangeRegexLetters)) {
+    } else if (value.match(monthlyRangeLetters)) {
         const range = indexesFromRangLetters(value);
         result = range;
+    } else if (value.match(monthlySeparatorLetters)) {
+        const monthsArray = value.trim().split(',');
+        result = monthsArray.map(el => months.indexOf(el)).map(String);
     }
 
     return { result };
 }
 
-export default processWeekly;
+export default processMonthly;
 
 const indexesFromRangeNum = (range: string): string[] => {
     const indexes: string[] = [];
@@ -46,11 +42,12 @@ const indexesFromRangeNum = (range: string): string[] => {
     const sortedStart = Math.min(start, end);
     const sortedEnd = Math.max(start, end);
 
-    if (sortedStart >= 0 && sortedStart <= 6 && sortedEnd >= 0 && sortedEnd <= 6) {
+    if (sortedStart >= 1 && sortedStart <= 12 && sortedEnd >= 1 && sortedEnd <= 12) {
         for (let i = sortedStart; i <= sortedEnd; i++) {
             indexes.push(i.toString());
         }
     }
+
     return indexes;
 };
 
@@ -58,19 +55,20 @@ const indexesFromRangLetters = (range: string): string[] => {
     const indexes: string[] = [];
 
     const parts = range.split('-');
-    const startDay = parts[0].toLowerCase();
-    const endDay = parts[1].toLowerCase();
+    const startMonth = parts[0].toLowerCase();
+    const endMonth = parts[1].toLowerCase();
 
-    const startIndex = weekdays.indexOf(startDay);
-    const endIndex = weekdays.indexOf(endDay);
+    const startIndex = months.findIndex(month => month.toLowerCase() === startMonth);
+    const endIndex = months.findIndex(month => month.toLowerCase() === endMonth);
 
     const sortedStartIndex = Math.min(startIndex, endIndex);
     const sortedEndIndex = Math.max(startIndex, endIndex);
 
     if (sortedStartIndex !== -1 && sortedEndIndex !== -1) {
         for (let i = sortedStartIndex; i <= sortedEndIndex; i++) {
-            indexes.push(i.toString());
+            indexes.push((i + 1).toString());
         }
     }
+
     return indexes;
 };

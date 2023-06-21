@@ -1,11 +1,12 @@
 import { nanoid } from "nanoid";
-import { AtTime } from "types/interface";
 import { hourRegex, minuteRegex } from "utils/regexPatterns/regexPatterns";
+import { AtTime } from "types/interface";
+
 
 const minuteRules = minuteRegex;
 const hourRules = hourRegex;
 
-const processTime = (minutes: string, hours: string) => {
+const processTime = (minutes: string, hours: string): AtTime[] => {
     let arrayMinutes: string[];
     let arrayHours: string[];
 

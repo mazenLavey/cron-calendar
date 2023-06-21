@@ -1,121 +1,63 @@
-import { nanoid } from "nanoid";
-import { createContext, useState, useEffect } from "react";
-import { CalendarFrom } from "types/interface";
+import { createContext, useState } from "react";
+import { CalCronTask } from "types/interface";
 
 type Props = {
     children: React.ReactNode
 }
 
 interface CronContextType {
-    calendarData: CalendarFrom[],
-    currentCalendar: CalendarFrom,
-    addCal: (newCal: CalendarFrom) => void,
-    deleteCal: (calId: string) => void,
-    addToCurrentCalendar: (calId: string) => void,
-    addNewCal: () => void
+    calendarData: CalCronTask,
+    loadToCalendar: (obj: CalCronTask) => void
 }
 
 const CronContext = createContext<CronContextType>({
-    calendarData: [],
-    currentCalendar: {
-        calId: nanoid(),
-        atTime: [],
-
-        daily: false,
-        dailyOperationType: 'selectedDays',
-        rangeOfDays: '',
-        selectedDays: '',
-
-        monthly: false,
-        monthlyOperationType: 'selectedMonths',
-        rangeOfMonths: '',
-        selectedMonth: [],
-
-        weekly: false,
-        selectedDaysInWeek: [],
+    calendarData: {
+        id: '',
+        taskType: 'weekly',
+        weekly: {
+            days: [],
+            time: '00:00'
+        },
+        dailyAtTime: {
+            time: []
+        },
+        dailyEachMinute: {
+            minutes: ''
+        },
+        monthly: {
+            months: [],
+            time: '00:00'
+        }
     },
-    addCal: (newCal) => { },
-    deleteCal: (calId) => { },
-    addToCurrentCalendar: (calId) => { },
-    addNewCal: () => { }
+    loadToCalendar: (obj) => { }
 });
 
 const CronProvider: React.FC<Props> = ({ children }) => {
-    const [calendarData, setCalendarData] = useState<CalendarFrom[]>([]);
-    const [currentCalendar, setCurrentCalendar] = useState<CalendarFrom>({
-        calId: nanoid(),
-        atTime: [],
-
-        daily: false,
-        dailyOperationType: 'selectedDays',
-        rangeOfDays: '',
-        selectedDays: '',
-
-        monthly: false,
-        monthlyOperationType: 'selectedMonths',
-        rangeOfMonths: '',
-        selectedMonth: [],
-
-        weekly: false,
-        selectedDaysInWeek: [],
+    const [calendarData, setCalendarData] = useState<CalCronTask>({
+        id: '',
+        taskType: 'weekly',
+        weekly: {
+            days: [],
+            time: '00:00'
+        },
+        dailyAtTime: {
+            time: []
+        },
+        dailyEachMinute: {
+            minutes: '1'
+        },
+        monthly: {
+            months: [],
+            time: '00:00'
+        }
     });
 
-    useEffect(() => {
-        const localData: string | null = localStorage.getItem('cronCalendarData');
-        if (localData !== null) {
-            setCalendarData(JSON.parse(localData));
-        }
-    }, []);
-
-    useEffect(() => {
-        if (calendarData.length === 0) return
-        localStorage.setItem('cronCalendarData', JSON.stringify(calendarData));
-    }, [calendarData]);
-
-    const addCal = (newCal: CalendarFrom): void => {
-        setCalendarData(prev => {
-            if (prev.filter(el => el.calId === newCal.calId).length > 0) {
-                return prev.map(el => el.calId === newCal.calId ? newCal : el);
-            } else {
-                return [newCal, ...prev];
-            }
-        });
-    }
-    const addNewCal = (): void => {
-        const newCal: CalendarFrom = {
-            calId: nanoid(),
-            atTime: [],
-
-            daily: false,
-            dailyOperationType: 'selectedDays',
-            rangeOfDays: '',
-            selectedDays: '',
-
-            monthly: false,
-            monthlyOperationType: 'selectedMonths',
-            rangeOfMonths: '',
-            selectedMonth: [],
-
-            weekly: false,
-            selectedDaysInWeek: [],
-        };
-
-        addCal(newCal);
-    }
-    const deleteCal = (calId: string): void => {
-        const updatedArray = calendarData.filter(el => el.calId !== calId);
-        setCalendarData(updatedArray);
-    }
-
-    const addToCurrentCalendar = (calId: string): void => {
-        const findCal = calendarData?.find(el => el.calId === calId);
-        if (findCal) {
-            setCurrentCalendar(findCal);
-        }
+    const loadToCalendar = (obj: CalCronTask): void => {
+        setCalendarData(obj)
     }
 
     return (
-        <CronContext.Provider value={{ calendarData, currentCalendar, addCal, deleteCal, addToCurrentCalendar, addNewCal }}>
+        <CronContext.Provider value={{ calendarData, loadToCalendar }}>
             {children}
         </CronContext.Provider>
     )

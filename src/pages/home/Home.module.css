@@ -12,3 +12,60 @@
     justify-content: center;
     gap: 20px;
 }
+
+.testInput {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.testInput__btns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.testInput__btns>button {
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: var(--font-400);
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: var(--white);
+}
+
+.testInput__btns>button:active {
+    scale: 0.95;
+}
+
+.testInput__btns>button:hover {
+    opacity: 0.7;
+}
+
+.testInput__btns_save {
+    background-color: #41b744;
+}
+
+.testInput__btns_load {
+    background-color: #efc23f;
+}
+
+.testInput__textBox {
+    height: 45px;
+    padding: 0 10px;
+    border-radius: 17px;
+    color: white;
+    border: 1px solid #9a9aa0;
+    outline: none;
+    background-color: #222;
+    text-align: center;
+    font-size: var(--font-600);
+}

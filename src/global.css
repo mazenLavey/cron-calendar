@@ -9,14 +9,14 @@
 
     --black: #111;
     --blue-0: #6db0ff;
-    --blue-1: #f8f9ff;
+    --blue-1: #fcfcfc;
     --blue-2: #e6e7f1;
     --white: #fff;
     --gray-0: #999;
     --gray-1: #e7e7e7;
     --red-0: #fc7f7f;
 
-    --shadow-color: #e7e7e7;
+    --shadow-color: #b5b2b2;
 
     --border-radius-primary: 8px;
     --border-radius-secondary: 4px;
@@ -203,3 +203,10 @@ input[type="checkbox"]:checked::after {
 }
 
 /* end animation */
+
+.field__disabled {
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: 0.3s;
+}

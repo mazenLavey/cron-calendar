@@ -1,29 +1,55 @@
 .field {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
     padding: 10px;
     border: 1px solid var(--gray-1);
-    box-shadow: 0px 3px 5px var(--shadow-color);
     border-radius: var(--border-radius-primary);
 }
 
-.field__checkbox {
+.field__alignCenter {
+    align-items: center;
+}
+
+@media (max-width: 575px) {
+    .field__alignCenter {
+        align-items: start;
+    }
+}
+
+.field__contentColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.field__contentRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+
+
+.field__radioBox {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.field__checkbox>label {
+.field__radioBox>label {
     cursor: pointer;
 }
 
-.field__checkbox>label::first-letter {
+.field__radioBox>label::first-letter {
     text-transform: capitalize;
 }
 
-.field__inputBox,
-.field__selectBox {
+.field__inputBox {
     height: 30px;
     padding-left: 10px;
     border-radius: var(--border-radius-secondary);
@@ -31,22 +57,9 @@
     outline: none;
 }
 
-.field__selectBox {
-    grid-column: 1/1;
-    cursor: pointer;
-}
-
-.field__inputBox {
-    width: clamp(50px, 100%, 150px);
-}
-
-.field__selectBox::first-letter {
-    text-transform: capitalize;
-}
-
 .field__checkboxGroup {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
     gap: 5px;
 }
 
@@ -74,22 +87,17 @@
     cursor: pointer;
 }
 
-.field__time {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+.field__inputTime {
+    width: 80px;
+    text-align: center;
+    height: 30px;
+    border-radius: 5px;
+    border: 3px solid #78c9ec;
+    margin: 0 10px;
 }
 
 .field__timeControls {
     display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.field__timeInput {
-    display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
 }
@@ -107,4 +115,11 @@
 
 .feild__timeBtns_remove {
     background-color: var(--red-0);
+}
+
+.feild__timeBtns_disabled {
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: rgba(128, 128, 128, 0.199);
 }
