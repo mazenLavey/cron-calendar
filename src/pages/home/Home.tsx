@@ -5,17 +5,19 @@ import CronCalendar from "features/cronCalender/CronCalendar";
 import cronToObj from 'features/cronCalender/logic/cronToObj';
 
 const Home: React.FC = () => {
-    const [userInput, setUserInput] = useState('');
+    const [userInput, setUserInput] = useState<string>('');
     const { calendarData, loadToCalendar } = useContext(CronContext);
+    const [isInputError, setIsInputError] = useState<Boolean>(false);
 
     const loadData = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.stopPropagation();
         const result = cronToObj(userInput);
 
         if (result.status && result.value) {
+            setIsInputError(false);
             loadToCalendar(result.value);
         } else {
-            alert('use correct format')
+            setIsInputError(true);
         }
     }
 
@@ -38,7 +40,7 @@ const Home: React.FC = () => {
                             <button className={styles.testInput__btns_save} type='submit'>save</button>
                         </div>
                         <input
-                            className={styles.testInput__textBox}
+                            className={`${styles.testInput__textBox} ${isInputError ? styles.testInput__textBox_error : ''}`}
                             type="text"
                             name="userInput"
                             id="userInput"
@@ -46,6 +48,11 @@ const Home: React.FC = () => {
                             onChange={handleInput}
                             placeholder='* * * * *'
                         />
+                        {isInputError ?
+                            <p className={styles.testInput__errorMessage}>use a correct format</p>
+                            :
+                            null
+                        }
                     </div>
                 </CronCalendar>
             </div>

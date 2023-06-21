@@ -69,3 +69,15 @@
     text-align: center;
     font-size: var(--font-600);
 }
+
+.testInput__textBox_error {
+    border-color: tomato;
+}
+
+.testInput__errorMessage {
+    color: tomato;
+}
+
+.testInput__errorMessage::first-letter {
+    text-transform: capitalize;
+}

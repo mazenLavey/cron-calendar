@@ -32,7 +32,7 @@ const CronCalendar: React.FC<Props> = ({ data, children, changeUserInput }) => {
     }, [data, resetForm]);
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.calendar__wrapper} onSubmit={handleSubmit}>
             <div className={styles.calendar}>
                 <WeeklyField
                     values={values}
