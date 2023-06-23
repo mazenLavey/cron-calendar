@@ -38,10 +38,11 @@ export default processTime;
 function combineTimeArray(arrayMinutes: string[], arrayHours: string[]) {
     const combinedArray = [];
     const maxLength = Math.max(arrayMinutes.length, arrayHours.length);
+    const targetMinutes = arrayMinutes[0] || '00';
 
     for (let i = 0; i < maxLength; i++) {
         const hour = arrayHours[i] ? arrayHours[i].padStart(2, '0') : '00';
-        const minute = arrayMinutes[i] ? arrayMinutes[i].padStart(2, '0') : '00';
+        const minute = targetMinutes.padStart(2, '0');
         const time = `${hour}:${minute}`;
         combinedArray.push(time);
     }

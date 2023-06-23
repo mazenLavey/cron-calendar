@@ -21,7 +21,11 @@ const DailyAtTimeField: React.FC<Props> = ({ values, handleChange, handleTime })
                     value: value
                 }
             } else {
-                return el
+                const theOtherTimeMin = `${el.value.slice(0, 2)}:${value.slice(3, 5)}`
+                return {
+                    ...el,
+                    value: theOtherTimeMin
+                }
             }
         })
 
@@ -41,7 +45,7 @@ const DailyAtTimeField: React.FC<Props> = ({ values, handleChange, handleTime })
         if (timeArray.length < 2) {
             const newTimeFeild: AtTime = {
                 id: nanoid(),
-                value: '00:00'
+                value: timeArray.length === 0 ? '00:00' : timeArray[0].value
             }
 
             timeArray?.push(newTimeFeild);

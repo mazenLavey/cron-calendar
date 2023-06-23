@@ -1,4 +1,4 @@
-.Home__wrapper {
+.home__wrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -6,7 +6,7 @@
     margin-bottom: 50px;
 }
 
-.Home__dashboard {
+.home__dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     justify-content: center;

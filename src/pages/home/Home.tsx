@@ -5,8 +5,8 @@ import CronCalendar from "features/cronCalender/CronCalendar";
 import cronToObj from 'features/cronCalender/logic/cronToObj';
 
 const Home: React.FC = () => {
-    const [userInput, setUserInput] = useState<string>('');
     const { calendarData, loadToCalendar } = useContext(CronContext);
+    const [userInput, setUserInput] = useState<string>('');
     const [isInputError, setIsInputError] = useState<Boolean>(false);
 
     const loadData = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -30,9 +30,8 @@ const Home: React.FC = () => {
     }
 
     return (
-        <main className={`${styles.Home__wrapper} container`}>
-
-            <div className={styles.Home__dashboard}>
+        <main className={`${styles.home__wrapper} container`}>
+            <div className={styles.home__dashboard}>
                 <CronCalendar data={calendarData} changeUserInput={changeUserInput}>
                     <div className={styles.testInput}>
                         <div className={styles.testInput__btns}>

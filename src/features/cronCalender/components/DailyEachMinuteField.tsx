@@ -1,17 +1,13 @@
 import React from "react";
 import { CalCronTask } from "types/interface";
 import styles from './Field.module.css';
-import { FormikErrors, FormikTouched } from "formik";
 
 type Props = {
     values: CalCronTask,
     handleChange: (event: React.ChangeEvent<any>) => void,
-    handleBlur: (event: React.ChangeEvent<any>) => void,
-    touched: FormikTouched<CalCronTask>,
-    errors: FormikErrors<CalCronTask>
 }
 
-const DailyEachMinuteField: React.FC<Props> = ({ values, handleChange, handleBlur, errors, touched }) => {
+const DailyEachMinuteField: React.FC<Props> = ({ values, handleChange }) => {
     return (
         <div className={`${styles.field} ${styles.field__alignCenter}`}>
             <div className={styles.field__radioBox}>

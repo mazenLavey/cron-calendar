@@ -30,7 +30,7 @@ const convertToObj = (userInput: string): CalCronTask => {
     const cronMintues: string = inputToArray[0];
     const cronHours: string = inputToArray[1];
     const resultTime = processTime(cronMintues, cronHours);
-    // console.log(resultTime)
+
     // process Month
     const cronMonth: string = inputToArray[3];
     const resultMonths = processMonthly(cronMonth);

@@ -20,7 +20,7 @@ const objToCron = (taskObj: CalCronTask): string => {
 
 export default objToCron;
 
-const processWeeklyData = (taskObj: CalCronTask) => {
+const processWeeklyData = (taskObj: CalCronTask): string => {
     const hour: string = taskObj.weekly.time.slice(0, 2);
     const minutes: string = taskObj.weekly.time.slice(3, 5);
     const weekdays: string = taskObj.weekly.days.map(Number).sort((a, b) => a - b).join(',');
@@ -30,36 +30,25 @@ const processWeeklyData = (taskObj: CalCronTask) => {
     return result;
 }
 
-const processDailyAtTimeData = (taskObj: CalCronTask) => {
+const processDailyAtTimeData = (taskObj: CalCronTask): string => {
     let arrayMinute: string[] = taskObj.dailyAtTime.time.map(el => el.value.slice(3, 5)).map(el => el.startsWith('0') && el.length > 1 ? el[1] : el);
-    let minute: string;
-
-    if (arrayMinute.length === 0) {
-        minute = '*';
-    } else {
-        minute = arrayMinute.join(',');
-    }
+    let minute: string = arrayMinute.length === 0 ? '*' : arrayMinute[0];
 
     let arrayHour: string[] = taskObj.dailyAtTime.time.map(el => el.value.slice(0, 2)).map(el => el.startsWith('0') && el.length > 1 ? el[1] : el);
-    let hour: string;
-    if (arrayHour.length === 0) {
-        hour = '*';
-    } else {
-        hour = arrayHour.join(',');
-    }
+    let hour: string = arrayHour.length === 0 ? '*' : arrayHour.join(',');
 
     const result: string = `${minute} ${hour} * * *`;
     return result;
 }
 
-const processDailyEachMinuteData = (taskObj: CalCronTask) => {
+const processDailyEachMinuteData = (taskObj: CalCronTask): string => {
     const minutes: string = taskObj.dailyEachMinute.minutes
     const result: string = `${minutes.length === 2 && minutes.startsWith('0') ? minutes[1] : minutes} * * * *`;
 
     return result;
 }
 
-const processMonthlyData = (taskObj: CalCronTask) => {
+const processMonthlyData = (taskObj: CalCronTask): string => {
     const hour: string = taskObj.monthly.time.slice(0, 2);
     const minutes: string = taskObj.monthly.time.slice(3, 5);
     const months: string = taskObj.monthly.months.map(Number).sort((a, b) => a - b).join(',');

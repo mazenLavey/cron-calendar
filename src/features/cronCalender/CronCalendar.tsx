@@ -7,6 +7,7 @@ import DailyAtTimeField from './components/DailyAtTimeField';
 import { CalCronTask } from 'types/interface';
 import objToCron from './logic/objToCron';
 import styles from './CronCalendar.module.css';
+import cronstrue from 'cronstrue';
 
 type Props = {
     data: CalCronTask;
@@ -21,7 +22,7 @@ const CronCalendar: React.FC<Props> = ({ data, children, changeUserInput }) => {
         changeUserInput(result);
     }
 
-    const { values, errors, touched, setFieldValue, handleChange, handleBlur, resetForm, handleSubmit } = useFormik<CalCronTask>({
+    const { values, setFieldValue, handleChange, resetForm, handleSubmit } = useFormik<CalCronTask>({
         initialValues: data,
         onSubmit: sendData
     });
@@ -30,6 +31,14 @@ const CronCalendar: React.FC<Props> = ({ data, children, changeUserInput }) => {
     useEffect(() => {
         resetForm({ values: data });
     }, [data, resetForm]);
+
+    // cron to words
+    const inWords = (val: CalCronTask): string => {
+        const cron = objToCron(val);
+        const phrase = cronstrue.toString(cron, { use24HourTimeFormat: true });
+
+        return phrase;
+    }
 
     return (
         <form className={styles.calendar__wrapper} onSubmit={handleSubmit}>
@@ -41,9 +50,6 @@ const CronCalendar: React.FC<Props> = ({ data, children, changeUserInput }) => {
                 <DailyEachMinuteField
                     values={values}
                     handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    touched={touched}
-                    errors={errors}
                 />
                 <DailyAtTimeField
                     values={values}
@@ -54,6 +60,7 @@ const CronCalendar: React.FC<Props> = ({ data, children, changeUserInput }) => {
                     values={values}
                     handleChange={handleChange}
                 />
+                <q className={styles.calendar__inWords}>{inWords(values)}</q>
             </div>
             {children}
         </form >

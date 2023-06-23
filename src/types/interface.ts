@@ -1,5 +1,8 @@
 
-
+export type AtTime = {
+    id: string,
+    value: string
+}
 
 type WeeklyType = {
     days: string[],
@@ -29,9 +32,4 @@ export interface CalCronTask {
     dailyEachMinute: DailyEachMinuteType,
     dailyAtTime: DailyAtTimeType,
     monthly: MonthlyType
-}
-
-export type AtTime = {
-    id: string,
-    value: string
 }

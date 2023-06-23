@@ -42,3 +42,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.calendar__inWords {
+    margin: 0 auto;
+    font-style: italic;
+}
