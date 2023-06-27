@@ -13,9 +13,9 @@ export const weeklyRangeNums = /^(?:[0-6]-[0-6])$/gm;
 export const weeklyRangeLetters = /^(?:mon|tue|wed|thu|fri|sat)-(?:mon|tue|wed|thu|fri|sat)$/gm;
 
 export const minuteRegex = /^(?:[0-5]?\d(?:,[0-5]?\d)*)$/g;
-
 export const hourRegex = /^(?:[0-9]|0\d|1\d|2[0-3])(?:,(?:[0-9]|0\d|1\d|2[0-3]))*$/g;
 
-export const weeklyTask = new RegExp(`(${minuteRegex.source}|${hourRegex.source}) (\\*|\\?) \\* \\*`, 'g');
-export const dailyAtTimeTask = /^(?:0?[1-9]|[1-5][0-9]) (?:0?[0-9]|1[0-9]|2[0-3]) (\*|\?) \* \*$/g;
-export const dailyEachMinuteTask = /^(\*\/\d+) \* \* \* \*$/g;
+export const weeklyTask = /^(?:[0-5]?[0-9]) (?:[01]?[0-9]|2[0-3]) (\*|\?) \* .+$/g;
+export const monthTask = /^(?:[0-5]?[0-9]) (?:[01]?[0-9]|2[0-3]) (\*|\?) .+ \*$/g;
+export const dailyEachMinuteTask = /^(\*\/\d+) \* (\*|\?) \* \*$/g;
+export const dailyAtTimeTask = /^(?:0?[1-9]|[1-5][0-9]) (?:0?[0-9]|1[0-9]|2[0-3]|(?:[0-9]+,[0-9]+)?) (\*|\?) \* \*$/g;

@@ -3,21 +3,35 @@ import { CronContext } from 'context/CronContext';
 import styles from './Home.module.css';
 import CronCalendar from "features/cronCalender/CronCalendar";
 import cronToObj from 'features/cronCalender/logic/cronToObj';
+import IsInputNotStandard from 'features/cronCalender/logic/IsInputNotStandard';
+
+const warningMessage = "Input format doesn't match calendar standard. Edit using calendar";
 
 const Home: React.FC = () => {
     const { calendarData, loadToCalendar } = useContext(CronContext);
     const [userInput, setUserInput] = useState<string>('');
     const [isInputError, setIsInputError] = useState<Boolean>(false);
+    const [isNotStandard, setIsNotStandard] = useState<Boolean>(false);
 
-    const loadData = (e: React.MouseEvent<HTMLButtonElement>): void => {
-        e.stopPropagation();
+    const loadData = (): void => {
         const result = cronToObj(userInput);
 
         if (result.status && result.value) {
             setIsInputError(false);
+            checkWarnings(userInput);
             loadToCalendar(result.value);
         } else {
             setIsInputError(true);
+        }
+    }
+
+    const checkWarnings = (inputInCron: string): void => {
+        let checkStandard = IsInputNotStandard(inputInCron.trim());
+        setIsNotStandard(checkStandard);
+    }
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+        if (e.key === 'Enter') {
+            loadData();
         }
     }
 
@@ -27,6 +41,7 @@ const Home: React.FC = () => {
 
     const changeUserInput = (newInput: string): void => {
         setUserInput(newInput);
+        checkWarnings(newInput);
     }
 
     return (
@@ -39,16 +54,22 @@ const Home: React.FC = () => {
                             <button className={styles.testInput__btns_save} type='submit'>save</button>
                         </div>
                         <input
-                            className={`${styles.testInput__textBox} ${isInputError ? styles.testInput__textBox_error : ''}`}
+                            className={`${styles.testInput__textBox} ${isInputError ? styles.testInput__textBox_error : ''} ${isNotStandard ? styles.testInput__textBox_warning : ''}`}
                             type="text"
                             name="userInput"
                             id="userInput"
                             value={userInput}
                             onChange={handleInput}
+                            onKeyDown={handleKeyDown}
                             placeholder='* * * * *'
                         />
                         {isInputError ?
                             <p className={styles.testInput__errorMessage}>use a correct format</p>
+                            :
+                            null
+                        }
+                        {isNotStandard ?
+                            <p className={styles.testInput__warningMessage}>{warningMessage}</p>
                             :
                             null
                         }

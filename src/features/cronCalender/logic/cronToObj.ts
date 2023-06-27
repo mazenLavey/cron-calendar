@@ -4,7 +4,6 @@ import processTime from "./processTime";
 import processMonthly from "./processMonthly";
 import processWeekly from "./processWeekly";
 import { nanoid } from "nanoid";
-import { dailyEachMinuteTask } from "utils/regexPatterns/regexPatterns";
 
 type Output = {
     status: boolean,
@@ -29,18 +28,17 @@ const convertToObj = (userInput: string): CalCronTask => {
 
     // find the task type
     let taskType: TaskType = 'dailyAtTime';
-    if (weekdays === '*' && months !== "*") {
+    if (mintues.startsWith('*/')) {
+        taskType = 'dailyEachMinute';
+        eachMintue = mintues.slice(2,).replace(/^0+(?=\d)/, '');
+    } else if (weekdays === '*' && months !== "*") {
         taskType = 'monthly';
     } else if (weekdays !== '*' && months === "*") {
         taskType = 'weekly';
-    } else if (userInput.match(dailyEachMinuteTask)) {
-        taskType = 'dailyEachMinute';
-        eachMintue = mintues.slice(2,).replace(/^0+(?=\d)/, '');
     }
 
     // process time
     const resultTime = processTime(mintues, hours);
-
     // process Month
     const resultMonths = processMonthly(months);
     // process Weekly
@@ -54,7 +52,7 @@ const convertToObj = (userInput: string): CalCronTask => {
             time: resultTime.length > 0 ? resultTime[0]?.value : "00:00"
         },
         dailyAtTime: {
-            time: resultTime,
+            time: resultTime.slice(0, 2),
         },
         dailyEachMinute: {
             minutes: eachMintue,
