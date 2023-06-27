@@ -212,3 +212,15 @@ input[type="checkbox"]:checked::after {
     opacity: 0.5;
     transition: 0.3s;
 }
+
+.icon {
+    font-size: var(--font-600);
+}
+
+.icon_warning {
+    color: var(--warning);
+}
+
+.icon_error {
+    color: var(--error);
+}

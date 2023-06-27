@@ -4,6 +4,7 @@ import styles from './Home.module.css';
 import CronCalendar from "features/cronCalender/CronCalendar";
 import cronToObj from 'features/cronCalender/logic/cronToObj';
 import IsInputNotStandard from 'features/cronCalender/logic/IsInputNotStandard';
+import { IoWarning, IoCloseCircle } from "react-icons/io5";
 
 const warningMessage = "Input format doesn't match calendar standard. Edit using calendar";
 
@@ -64,12 +65,12 @@ const Home: React.FC = () => {
                             placeholder='* * * * *'
                         />
                         {isInputError ?
-                            <p className={styles.testInput__errorMessage}>use a correct format</p>
+                            <p className={styles.testInput__message}><IoCloseCircle className='icon icon_error' /> Use a correct format</p>
                             :
                             null
                         }
                         {isNotStandard ?
-                            <p className={styles.testInput__warningMessage}>{warningMessage}</p>
+                            <p className={styles.testInput__message}><IoWarning className='icon icon_warning' /> {warningMessage}</p>
                             :
                             null
                         }

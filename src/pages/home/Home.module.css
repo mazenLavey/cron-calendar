@@ -70,22 +70,16 @@
     font-size: var(--font-600);
 }
 
-.testInput__errorMessage {
-    color: var(--error);
+.testInput__message {
+    display: flex;
+    gap: 10px;
+    color: var(--gray-0);
 }
 
 .testInput__textBox_error {
     border-color: var(--error);
 }
 
-.testInput__errorMessage::first-letter {
-    text-transform: capitalize;
-}
-
 .testInput__textBox_warning {
     border-color: var(--warning);
-}
-
-.testInput__warningMessage {
-    color: var(--warning);
 }
