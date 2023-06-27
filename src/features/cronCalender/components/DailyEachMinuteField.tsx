@@ -31,7 +31,7 @@ const DailyEachMinuteField: React.FC<Props> = ({ values, handleChange }) => {
                     value={values.dailyEachMinute.minutes}
                     onChange={handleChange}
                     min={1}
-                    max={59}
+
                 />
                 <span>minutes</span>
             </div>

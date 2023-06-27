@@ -10,6 +10,7 @@ const processTime = (minutes: string, hours: string): AtTime[] => {
     let arrayMinutes: string[];
     let arrayHours: string[];
 
+
     if (minutes.match(minuteRules)) {
         arrayMinutes = minutes.split(',');
     } else {

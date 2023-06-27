@@ -43,7 +43,7 @@ const processDailyAtTimeData = (taskObj: CalCronTask): string => {
 
 const processDailyEachMinuteData = (taskObj: CalCronTask): string => {
     const minutes: string = taskObj.dailyEachMinute.minutes
-    const result: string = `${minutes.length === 2 && minutes.startsWith('0') ? minutes[1] : minutes} * * * *`;
+    const result: string = `${minutes.length === 2 && minutes.startsWith('0') ? `*/${minutes[1]}` : `*/${minutes}`} * * * *`;
 
     return result;
 }

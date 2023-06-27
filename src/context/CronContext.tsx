@@ -22,7 +22,7 @@ const CronContext = createContext<CronContextType>({
             time: []
         },
         dailyEachMinute: {
-            minutes: ''
+            minutes: '1'
         },
         monthly: {
             months: [],

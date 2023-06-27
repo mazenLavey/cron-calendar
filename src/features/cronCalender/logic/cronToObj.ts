@@ -13,7 +13,6 @@ type Output = {
 
 const cronToObj = (cronString: string): Output => {
     if (isValidCron(cronString.trim(), { alias: true, allowBlankDay: true })) {
-        console.log('vaild')
         const value = convertToObj(cronString);
         return { status: true, value: value };
     } else {
@@ -25,29 +24,27 @@ export default cronToObj;
 
 const convertToObj = (userInput: string): CalCronTask => {
     const inputToArray = userInput.trim().split(' ');
+    const [mintues, hours, , months, weekdays] = inputToArray;
+    let eachMintue: string = '1';
 
-    // process time
-    const cronMintues: string = inputToArray[0];
-    const cronHours: string = inputToArray[1];
-    const resultTime = processTime(cronMintues, cronHours);
-
-    // process Month
-    const cronMonth: string = inputToArray[3];
-    const resultMonths = processMonthly(cronMonth);
-
-    // process Weekly
-    const cronDayWeek: string = inputToArray[4];
-    const selectedDaysInWeek = processWeekly(cronDayWeek);
-
+    // find the task type
     let taskType: TaskType = 'dailyAtTime';
-    if (cronDayWeek === '*' && cronMonth !== "*") {
+    if (weekdays === '*' && months !== "*") {
         taskType = 'monthly';
-    } else if (cronDayWeek !== '*' && cronMonth === "*") {
+    } else if (weekdays !== '*' && months === "*") {
         taskType = 'weekly';
     } else if (userInput.match(dailyEachMinuteTask)) {
         taskType = 'dailyEachMinute';
+        eachMintue = mintues.slice(2,).replace(/^0+(?=\d)/, '');
     }
 
+    // process time
+    const resultTime = processTime(mintues, hours);
+
+    // process Month
+    const resultMonths = processMonthly(months);
+    // process Weekly
+    const selectedDaysInWeek = processWeekly(weekdays);
 
     const newCaledarObj: CalCronTask = {
         id: nanoid(),
@@ -60,7 +57,7 @@ const convertToObj = (userInput: string): CalCronTask => {
             time: resultTime,
         },
         dailyEachMinute: {
-            minutes: cronMintues === "*" ? '1' : cronMintues,
+            minutes: eachMintue,
         },
         monthly: {
             months: resultMonths?.result,
